@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;800&amp;family=Zen+Kaku+Gothic+New:wght@400;500;700&amp;family=Klee+One:wght@400;600&amp;family=Yomogi&amp;display=swap" rel="stylesheet">
+<title>株式会社筆記堂システムズ｜手書きプログラミング専業</title>
+<meta name="description" content="すべてのソースコードを鉛筆で原稿用紙に書き起こす、手書き専業のシステム開発会社。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23b8371f'/%3E%3Ctext x='32' y='46' font-size='40' text-anchor='middle' fill='%23f3eee3' font-family='serif' font-weight='bold'%3E%E7%AD%86%3C/text%3E%3C/svg%3E">
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#f3eee3"></rect><rect x="60" y="60" width="80" height="80" rx="6" fill="#b8371f"></rect><text x="100" y="122" font-size="52" text-anchor="middle" fill="#f3eee3" font-family="serif" font-weight="bold">筆</text></svg></template>
+<style>
+html,body{text-wrap:pretty;word-break:auto-phrase;line-break:strict;overflow-wrap:anywhere;margin:0;padding:0;background:#f3eee3;color:#1d1c1a;font-family:'Zen Kaku Gothic New',sans-serif;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#1d1c1a;text-decoration:none}
+a:hover{color:#b8371f}
+::selection{background:#b8371f;color:#f3eee3}
+summary{cursor:pointer;list-style:none}
+summary::-webkit-details-marker{display:none}
+</style>
+</helmet>
+
+<div lang="ja" style="min-height:100vh;display:flex;flex-direction:column">
+
+<header style="position:sticky;top:0;z-index:10;background:#f3eee3;border-bottom:3px double #1d1c1a">
+  <div style="max-width:1200px;margin:0 auto;padding:14px 24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 32px">
+    <a href="#/" onClick="{{ go.home }}" style="display:flex;align-items:center;gap:12px">
+      <div style="width:44px;height:44px;background:#b8371f;color:#f3eee3;display:flex;align-items:center;justify-content:center;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:26px;border-radius:4px;transform:rotate(-4deg)">筆</div>
+      <div style="display:flex;flex-direction:column;gap:2px">
+        <span style="font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:19px;letter-spacing:.06em">筆記堂システムズ</span>
+        <span style="font-size:10px;letter-spacing:.28em;color:#4a463f">HIKKIDO SYSTEMS</span>
+      </div>
+    </a>
+    <sc-if value="{{ desktop }}" hint-placeholder-val="{{ true }}"><nav style="display:flex;flex-wrap:wrap;align-items:center;gap:6px 22px;font-size:14px;font-weight:500">
+      <a href="#/philosophy" onClick="{{ go.philosophy }}" style="position:relative;padding:8px 0">手書き宣言<sc-if value="{{ is.philosophy }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;left:0;right:0;bottom:0;height:2px;background:#b8371f"></span></sc-if></a>
+      <a href="#/service" onClick="{{ go.service }}" style="position:relative;padding:8px 0">サービス<sc-if value="{{ is.service }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;left:0;right:0;bottom:0;height:2px;background:#b8371f"></span></sc-if></a>
+      <a href="#/process" onClick="{{ go.process }}" style="position:relative;padding:8px 0">開発工程<sc-if value="{{ is.process }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;left:0;right:0;bottom:0;height:2px;background:#b8371f"></span></sc-if></a>
+      <a href="#/works" onClick="{{ go.works }}" style="position:relative;padding:8px 0">導入事例<sc-if value="{{ is.works }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;left:0;right:0;bottom:0;height:2px;background:#b8371f"></span></sc-if></a>
+      <a href="#/security" onClick="{{ go.security }}" style="position:relative;padding:8px 0">セキュリティ<sc-if value="{{ is.security }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;left:0;right:0;bottom:0;height:2px;background:#b8371f"></span></sc-if></a>
+      <a href="#/company" onClick="{{ go.company }}" style="position:relative;padding:8px 0">会社情報<sc-if value="{{ is.company }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;left:0;right:0;bottom:0;height:2px;background:#b8371f"></span></sc-if></a>
+      <a href="#/recruit" onClick="{{ go.recruit }}" style="position:relative;padding:8px 0">採用情報<sc-if value="{{ is.recruit }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;left:0;right:0;bottom:0;height:2px;background:#b8371f"></span></sc-if></a>
+      <a href="#/contact" onClick="{{ go.contact }}" style="padding:10px 18px;background:#1d1c1a;color:#f3eee3;font-weight:700" style-hover="background:#b8371f;color:#f3eee3">お問い合わせ</a>
+    </nav>
+    </sc-if>
+    <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+      <button type="button" onClick="{{ toggleMenu }}" aria-label="メニュー" style="font:inherit;font-size:14px;font-weight:700;min-width:44px;min-height:44px;padding:0 16px;display:flex;align-items:center;gap:10px;background:#1d1c1a;color:#f3eee3;border:0;cursor:pointer"><span style="display:flex;flex-direction:column;gap:4px"><span style="width:18px;height:2px;background:#f3eee3"></span><span style="width:18px;height:2px;background:#f3eee3"></span><span style="width:18px;height:2px;background:#f3eee3"></span></span>{{ menuLabel }}</button>
+    </sc-if>
+  </div>
+  <sc-if value="{{ mobileMenuOpen }}" hint-placeholder-val="{{ false }}">
+    <nav style="border-top:1px solid #1d1c1a;background:#f3eee3;max-height:calc(100vh - 76px);overflow-y:auto;display:flex;flex-direction:column;padding:8px 24px 24px;font-size:17px;font-weight:500">
+      <a href="#/" onClick="{{ go.home }}" style="padding:16px 0;border-bottom:1px solid #d9cfbb">ホーム</a>
+      <a href="#/philosophy" onClick="{{ go.philosophy }}" style="padding:16px 0;border-bottom:1px solid #d9cfbb">手書き宣言</a>
+      <a href="#/service" onClick="{{ go.service }}" style="padding:16px 0;border-bottom:1px solid #d9cfbb">サービス</a>
+      <a href="#/process" onClick="{{ go.process }}" style="padding:16px 0;border-bottom:1px solid #d9cfbb">開発工程</a>
+      <a href="#/works" onClick="{{ go.works }}" style="padding:16px 0;border-bottom:1px solid #d9cfbb">導入事例</a>
+      <a href="#/security" onClick="{{ go.security }}" style="padding:16px 0;border-bottom:1px solid #d9cfbb">セキュリティ</a>
+      <a href="#/company" onClick="{{ go.company }}" style="padding:16px 0;border-bottom:1px solid #d9cfbb">会社情報</a>
+      <a href="#/recruit" onClick="{{ go.recruit }}" style="padding:16px 0;border-bottom:1px solid #d9cfbb">採用情報</a>
+      <a href="#/news" onClick="{{ go.news }}" style="padding:16px 0;border-bottom:1px solid #d9cfbb">お知らせ</a>
+      <a href="#/contact" onClick="{{ go.contact }}" style="margin-top:20px;padding:16px;text-align:center;background:#1d1c1a;color:#f3eee3;font-weight:700">お問い合わせ</a>
+    </nav>
+  </sc-if>
+</header>
+
+<main style="flex:1">
+
+<!-- ============ HOME ============ -->
+<sc-if value="{{ is.home }}" hint-placeholder-val="{{ true }}">
+
+<section style="background-color:#efe9dc;background-image:linear-gradient(rgba(184,55,31,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(184,55,31,.10) 1px,transparent 1px);background-size:28px 28px;border-bottom:1px solid #1d1c1a">
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(56px,10vw,88px) 24px 96px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:64px;align-items:center">
+    <div style="display:flex;flex-direction:column;gap:28px">
+      <div style="font-size:13px;letter-spacing:.2em;color:#b8371f;font-weight:700">手書きプログラミング専業　創業1989年</div>
+      <h1 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:clamp(48px,8vw,92px);line-height:1.15;letter-spacing:.04em">コードは、<br>手で書く。</h1>
+      <p style="margin:0;font-size:17px;line-height:2;color:#3b3833;max-width:34em;text-wrap:pretty">キーボードは、速すぎる。速く書けるものは、速く写せる。<br>速く写せるものは、速く漏れる。<br>筆記堂システムズは、すべてのソースコードを鉛筆で原稿用紙に書き起こす、手書き専業のシステム開発会社です。</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px">
+        <a href="#/process" onClick="{{ go.process }}" style="padding:16px 28px;background:#1d1c1a;color:#f3eee3;font-weight:700;font-size:15px" style-hover="background:#b8371f;color:#f3eee3">開発工程を見る</a>
+        <a href="#/contact" onClick="{{ go.contact }}" style="padding:16px 28px;border:1px solid #1d1c1a;font-weight:700;font-size:15px;background:#f3eee3" style-hover="color:#b8371f;border-color:#b8371f">FAXでご相談 03-0000-1990</a>
+      </div>
+    </div>
+
+    <div style="position:relative;background:#fbf8f1;border:1px solid #cdbfa5;box-shadow:0 24px 48px -28px rgba(29,28,26,.45);transform:rotate(1.2deg);overflow:hidden">
+      <div style="display:flex;justify-content:space-between;gap:12px;padding:10px 16px;border-bottom:2px solid rgba(184,55,31,.5);font-size:11px;letter-spacing:.12em;color:#8a3a28">
+        <span>筆記堂式コード用原稿用紙　80桁×40行</span><span>No. 0412</span>
+      </div>
+      <div style="font-family:'Klee One',serif;font-size:clamp(14px,3.8vw,17px);color:#3a3936;padding:8px 0 24px">
+        <div style="display:flex;height:40px;align-items:center;border-bottom:1px solid rgba(184,55,31,.18)"><span style="width:44px;flex:none;text-align:center;font-size:11px;color:#b8371f;border-right:3px double rgba(184,55,31,.45);align-self:stretch;display:flex;align-items:center;justify-content:center">1</span><span style="padding-left:16px;white-space:pre">/* 会員ログイン処理 */</span></div>
+        <div style="display:flex;height:40px;align-items:center;border-bottom:1px solid rgba(184,55,31,.18)"><span style="width:44px;flex:none;text-align:center;font-size:11px;color:#b8371f;border-right:3px double rgba(184,55,31,.45);align-self:stretch;display:flex;align-items:center;justify-content:center">2</span><span style="padding-left:16px;white-space:pre">function login(id, pw) {</span></div>
+        <div style="display:flex;height:40px;align-items:center;border-bottom:1px solid rgba(184,55,31,.18)"><span style="width:44px;flex:none;text-align:center;font-size:11px;color:#b8371f;border-right:3px double rgba(184,55,31,.45);align-self:stretch;display:flex;align-items:center;justify-content:center">3</span><span style="padding-left:16px;white-space:pre">  if (!id || !pw) return false;</span></div>
+        <div style="display:flex;height:40px;align-items:center;border-bottom:1px solid rgba(184,55,31,.18)"><span style="width:44px;flex:none;text-align:center;font-size:11px;color:#b8371f;border-right:3px double rgba(184,55,31,.45);align-self:stretch;display:flex;align-items:center;justify-content:center">4</span><span style="padding-left:16px;white-space:pre">  const user = db.find(id);</span></div>
+        <div style="display:flex;min-height:40px;border-bottom:1px solid rgba(184,55,31,.18)"><span style="width:44px;flex:none;text-align:center;font-size:11px;color:#b8371f;border-right:3px double rgba(184,55,31,.45);display:flex;align-items:center;justify-content:center">5</span><span style="display:flex;flex-wrap:wrap;align-items:center;gap:0 14px;padding:6px 8px 6px 16px"><span style="white-space:pre;text-decoration:line-through;text-decoration-color:#c0392b;text-decoration-thickness:2px">  return user.pw == pw;</span><span style="color:#c0392b;font-size:15px;font-weight:600;white-space:nowrap">← 平文比較は不可</span></span></div>
+        <div style="display:flex;height:40px;align-items:center;border-bottom:1px solid rgba(184,55,31,.18)"><span style="width:44px;flex:none;text-align:center;font-size:11px;color:#b8371f;border-right:3px double rgba(184,55,31,.45);align-self:stretch;display:flex;align-items:center;justify-content:center">6</span><span style="padding-left:16px;white-space:pre">  return verify(user, pw);</span></div>
+        <div style="display:flex;height:40px;align-items:center;border-bottom:1px solid rgba(184,55,31,.18)"><span style="width:44px;flex:none;text-align:center;font-size:11px;color:#b8371f;border-right:3px double rgba(184,55,31,.45);align-self:stretch;display:flex;align-items:center;justify-content:center">7</span><span style="padding-left:16px;white-space:pre">}</span></div>
+        <div style="display:flex;height:40px;align-items:center;border-bottom:1px solid rgba(184,55,31,.18)"><span style="width:44px;flex:none;align-self:stretch;border-right:3px double rgba(184,55,31,.45)"></span></div>
+        <div style="display:flex;height:40px;align-items:center;border-bottom:1px solid rgba(184,55,31,.18)"><span style="width:44px;flex:none;align-self:stretch;border-right:3px double rgba(184,55,31,.45)"></span></div>
+      </div>
+      <div style="position:absolute;right:28px;bottom:28px;width:84px;height:84px;border:2.5px solid #c0392b;border-radius:50%;color:#c0392b;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transform:rotate(-14deg);font-family:'Shippori Mincho B1',serif;font-weight:800;opacity:.9">
+        <span style="font-size:22px;line-height:1">査読済</span><span style="font-size:10px;letter-spacing:.06em;border-top:1px solid #c0392b;padding-top:3px">10.21 墨田</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="border-bottom:1px solid #d9cfbb">
+  <div style="max-width:1200px;margin:0 auto;padding:22px 24px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 32px">
+    <span style="font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:15px;letter-spacing:.1em">お知らせ</span>
+    <div style="flex:1;min-width:260px;display:flex;flex-direction:column;gap:8px;font-size:14px">
+      <div style="display:flex;flex-wrap:wrap;gap:4px 16px"><span style="color:#4a463f;font-variant-numeric:tabular-nums">2026.10.14</span><span>年末年始のFAX受付について</span></div>
+      <div style="display:flex;flex-wrap:wrap;gap:4px 16px"><span style="color:#4a463f;font-variant-numeric:tabular-nums">2026.09.30</span><span>N市様の窓口予約システムが稼働しました</span></div>
+    </div>
+    <a href="#/news" onClick="{{ go.news }}" style="font-size:14px;font-weight:700;border-bottom:1px solid currentColor;padding-bottom:2px">一覧を見る</a>
+  </div>
+</section>
+
+<section>
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(56px,10vw,112px) 24px;display:flex;flex-direction:column;gap:56px">
+    <div style="display:flex;flex-direction:column;gap:16px;max-width:40em">
+      <div style="font-size:13px;letter-spacing:.2em;color:#b8371f;font-weight:700">REASON</div>
+      <h2 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:clamp(30px,4.4vw,44px);line-height:1.4;letter-spacing:.04em">なぜ、手書きなのか。</h2>
+      <p style="margin:0;font-size:16px;line-height:2;color:#3b3833;text-wrap:pretty">脆弱性の多くは、考えずに書かれた一行から生まれます。手で書くと、考えずに書くことができません。</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:0;border-top:1px solid #1d1c1a">
+      <div style="padding:36px 32px 36px 0;display:flex;flex-direction:column;gap:16px;border-bottom:1px solid #d9cfbb">
+        <span style="font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:40px;color:#b8371f">壱</span>
+        <h3 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:23px;line-height:1.5">コピー＆ペーストが、<br>できない。</h3>
+        <p style="margin:0;font-size:15px;line-height:1.95;color:#3b3833;text-wrap:pretty">鉛筆にはクリップボードがありません。出所のわからないコードや、脆弱なサンプルが紛れ込む経路が、そもそも存在しません。</p>
+      </div>
+      <div style="padding:36px 32px 36px 0;display:flex;flex-direction:column;gap:16px;border-bottom:1px solid #d9cfbb">
+        <span style="font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:40px;color:#b8371f">弐</span>
+        <h3 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:23px;line-height:1.5">一行ごとに、<br>四分考える。</h3>
+        <p style="margin:0;font-size:15px;line-height:1.95;color:#3b3833;text-wrap:pretty">当社の平均記述速度は1行あたり4分12秒。書いている間に、入力値、境界値、例外を考え尽くします。</p>
+      </div>
+      <div style="padding:36px 32px 36px 0;display:flex;flex-direction:column;gap:16px;border-bottom:1px solid #d9cfbb">
+        <span style="font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:40px;color:#b8371f">参</span>
+        <h3 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:23px;line-height:1.5">原本は、<br>ネットにない。</h3>
+        <p style="margin:0;font-size:15px;line-height:1.95;color:#3b3833;text-wrap:pretty">ソースコードの原本は紙です。耐火金庫に三重施錠で保管しているため、遠隔から盗むことも書き換えることもできません。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#1d1c1a;color:#f3eee3">
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(56px,10vw,88px) 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:48px 32px">
+    <div style="display:flex;flex-direction:column;gap:10px;border-left:1px solid #5a564f;padding-left:20px">
+      <div style="font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:56px;line-height:1">0<span style="font-size:20px;margin-left:6px">件</span></div>
+      <div style="font-size:14px;line-height:1.7;color:#d9d2c3">創業以来の情報漏えい事故<br>（当社調べ）</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;border-left:1px solid #5a564f;padding-left:20px">
+      <div style="font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:56px;line-height:1">18,400<span style="font-size:20px;margin-left:6px">本</span></div>
+      <div style="font-size:14px;line-height:1.7;color:#d9d2c3">年間の鉛筆消費量<br>（2025年度）</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;border-left:1px solid #5a564f;padding-left:20px">
+      <div style="font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:56px;line-height:1">0<span style="font-size:20px;margin-left:6px">個</span></div>
+      <div style="font-size:14px;line-height:1.7;color:#d9d2c3">外部ライブラリへの依存</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;border-left:1px solid #5a564f;padding-left:20px">
+      <div style="font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:56px;line-height:1">4<span style="font-size:20px;margin:0 4px">分</span>12<span style="font-size:20px;margin-left:4px">秒</span></div>
+      <div style="font-size:14px;line-height:1.7;color:#d9d2c3">1行あたりの平均記述時間</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(56px,10vw,112px) 24px;display:flex;flex-direction:column;gap:48px">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="font-size:13px;letter-spacing:.2em;color:#b8371f;font-weight:700">SERVICE</div>
+        <h2 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:clamp(30px,4.4vw,44px);line-height:1.4;letter-spacing:.04em">事業内容</h2>
+      </div>
+      <a href="#/service" onClick="{{ go.service }}" style="font-size:14px;font-weight:700;border-bottom:1px solid currentColor;padding-bottom:2px">サービス詳細へ</a>
+    </div>
+    <div style="display:flex;flex-direction:column;border-top:1px solid #1d1c1a">
+      <a href="#/service" onClick="{{ go.service }}" style="display:grid;grid-template-columns:72px minmax(0,1fr);gap:8px 24px;padding:28px 0;border-bottom:1px solid #d9cfbb;align-items:baseline" style-hover="color:#b8371f"><span style="font-family:'Shippori Mincho B1',serif;font-size:18px;color:#b8371f">01</span><span style="display:flex;flex-wrap:wrap;gap:6px 24px;align-items:baseline"><span style="font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:24px">手書き受託開発</span><span style="font-size:15px;color:#4a463f">業務システム・Webシステムを、一行目から手で書きます。</span></span></a>
+      <a href="#/service" onClick="{{ go.service }}" style="display:grid;grid-template-columns:72px minmax(0,1fr);gap:8px 24px;padding:28px 0;border-bottom:1px solid #d9cfbb;align-items:baseline" style-hover="color:#b8371f"><span style="font-family:'Shippori Mincho B1',serif;font-size:18px;color:#b8371f">02</span><span style="display:flex;flex-wrap:wrap;gap:6px 24px;align-items:baseline"><span style="font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:24px">既存システムの書き起こし</span><span style="font-size:15px;color:#4a463f">打鍵で作られたコードを、すべて手で書き写して再生します。</span></span></a>
+      <a href="#/service" onClick="{{ go.service }}" style="display:grid;grid-template-columns:72px minmax(0,1fr);gap:8px 24px;padding:28px 0;border-bottom:1px solid #d9cfbb;align-items:baseline" style-hover="color:#b8371f"><span style="font-family:'Shippori Mincho B1',serif;font-size:18px;color:#b8371f">03</span><span style="display:flex;flex-wrap:wrap;gap:6px 24px;align-items:baseline"><span style="font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:24px">赤ペンセキュリティ監査</span><span style="font-size:15px;color:#4a463f">印刷したソースコードを、査読員が朱で添削します。</span></span></a>
+      <a href="#/service" onClick="{{ go.service }}" style="display:grid;grid-template-columns:72px minmax(0,1fr);gap:8px 24px;padding:28px 0;border-bottom:1px solid #d9cfbb;align-items:baseline" style-hover="color:#b8371f"><span style="font-family:'Shippori Mincho B1',serif;font-size:18px;color:#b8371f">04</span><span style="display:flex;flex-wrap:wrap;gap:6px 24px;align-items:baseline"><span style="font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:24px">写経研修</span><span style="font-size:15px;color:#4a463f">御社のエンジニアに、良いコードを手で写す習慣をお届けします。</span></span></a>
+    </div>
+  </div>
+</section>
+
+<section style="background:#ebe4d4;border-top:1px solid #d9cfbb;border-bottom:1px solid #d9cfbb">
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(56px,10vw,112px) 24px;display:flex;flex-direction:column;gap:48px">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="font-size:13px;letter-spacing:.2em;color:#b8371f;font-weight:700">WORKS</div>
+        <h2 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:clamp(30px,4.4vw,44px);line-height:1.4;letter-spacing:.04em">導入事例</h2>
+      </div>
+      <a href="#/works" onClick="{{ go.works }}" style="font-size:14px;font-weight:700;border-bottom:1px solid currentColor;padding-bottom:2px">すべての事例</a>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:24px">
+      <div style="background:#fbf8f1;border:1px solid #cdbfa5;padding:36px;display:flex;flex-direction:column;gap:20px">
+        <div style="font-size:13px;color:#4a463f;letter-spacing:.06em">自治体｜窓口予約システム</div>
+        <p style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:600;font-size:22px;line-height:1.7;text-wrap:pretty">「納期は長かったが、議会で原本を見せられたのが大きかった。」</p>
+        <div style="font-size:14px;font-weight:700">N市 様</div>
+      </div>
+      <div style="background:#fbf8f1;border:1px solid #cdbfa5;padding:36px;display:flex;flex-direction:column;gap:20px">
+        <div style="font-size:13px;color:#4a463f;letter-spacing:.06em">宿泊業｜予約・宿帳管理</div>
+        <p style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:600;font-size:22px;line-height:1.7;text-wrap:pretty">「宿帳をデジタル化するなら、手で書く会社に頼みたかった。」</p>
+        <div style="font-size:14px;font-weight:700">S旅館 様</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div style="max-width:880px;margin:0 auto;padding:clamp(56px,10vw,120px) 24px;display:flex;flex-direction:column;align-items:center;gap:28px;text-align:center">
+    <h2 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:clamp(32px,5vw,52px);line-height:1.4;letter-spacing:.06em">まずは、お手紙から。</h2>
+    <p style="margin:0;font-size:16px;line-height:2;color:#3b3833;text-wrap:pretty">ご相談は、来社・FAX・郵便にて承ります。Webフォームでいただいた内容も、受信後ただちに印刷し、担当者が手書きでご返信いたします。</p>
+    <a href="#/contact" onClick="{{ go.contact }}" style="padding:18px 36px;background:#b8371f;color:#f3eee3;font-weight:700;font-size:15px" style-hover="background:#1d1c1a;color:#f3eee3">お問い合わせ方法を見る</a>
+  </div>
+</section>
+</sc-if>
+
+<!-- ============ PHILOSOPHY ============ -->
+<sc-if value="{{ is.philosophy }}" hint-placeholder-val="{{ false }}">
+<section style="background-color:#efe9dc;background-image:linear-gradient(rgba(184,55,31,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(184,55,31,.10) 1px,transparent 1px);background-size:28px 28px;border-bottom:1px solid #1d1c1a">
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(48px,9vw,64px) 24px clamp(56px,10vw,56px);display:flex;flex-direction:column;gap:16px">
+    <div style="font-size:13px;color:#4a463f;display:flex;gap:8px"><a href="#/" onClick="{{ go.home }}">ホーム</a><span>／</span><span>手書き宣言</span></div>
+    <div style="font-size:13px;letter-spacing:.2em;color:#b8371f;font-weight:700">PHILOSOPHY</div>
+    <h1 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:clamp(36px,6vw,60px);line-height:1.3;letter-spacing:.04em">手書き宣言</h1>
+  </div>
+</section>
+<section>
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(56px,10vw,96px) 24px;display:flex;justify-content:center">
+    <div style="writing-mode:{{ mf.mode }};height:{{ mf.height }};max-width:100%;overflow-x:auto;font-family:'Shippori Mincho B1',serif;font-weight:600;font-size:{{ mf.size }};line-height:{{ mf.lh }};letter-spacing:.12em;color:#1d1c1a">
+      <p style="margin:0;margin-block-end:1.2em;font-weight:800;font-size:30px;color:#b8371f">手書き宣言</p>
+      <p style="margin:0">私たちは、</p><p style="margin:0">キーボードを疑うことから始めました。</p>
+      <p style="margin:0">速く打てるものは、速く写せる。</p>
+      <p style="margin:0">速く写せるものは、速く漏れる。</p>
+      <p style="margin:0">一文字ずつ書くことでしか、</p><p style="margin:0">一行ずつ考えることはできません。</p>
+      <p style="margin:0">鉛筆は、ネットワークに接続されていません。</p>
+      <p style="margin:0">原稿用紙は、遠隔から書き換えられません。</p>
+      <p style="margin:0">だから私たちは、</p><p style="margin:0">すべてのコードを手で書きます。</p>
+      <p style="margin:0;margin-block-start:1.6em;font-size:16px;text-align:end;white-space:nowrap">株式会社筆記堂システムズ</p><p style="margin:0;font-size:16px;text-align:end;white-space:nowrap">代表取締役　墨田正筆</p>
+    </div>
+  </div>
+</section>
+<section style="background:#ebe4d4;border-top:1px solid #d9cfbb;border-bottom:1px solid #d9cfbb">
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(56px,10vw,96px) 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:56px;align-items:start">
+    <img src="images/ceo.jpg" alt="原稿用紙に鉛筆で書く代表取締役 墨田正筆" style="display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 22%;border:1px solid #cdbfa5">
+    <div style="display:flex;flex-direction:column;gap:24px">
+      <div style="font-size:13px;letter-spacing:.2em;color:#b8371f;font-weight:700">MESSAGE</div>
+      <h2 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:clamp(28px,4vw,40px);line-height:1.5">遅いことは、<br>欠点ではありません。</h2>
+      <p style="margin:0;font-size:16px;line-height:2;color:#3b3833;text-wrap:pretty">1989年、神田の文具店の二階で、私たちは三人で会社を始めました。当時からずっと、コードは鉛筆で書いています。</p>
+      <p style="margin:0;font-size:16px;line-height:2;color:#3b3833;text-wrap:pretty">ニュースで情報漏えいが報じられるたびに、私たちは同じことを考えます。その一行は、誰かが本当に考えて書いたものだったのか。<br>手で書けば、考えずに書くことはできません。<br>読めない字は書き直しを求められ、曖昧な処理は赤ペンで囲まれます。</p>
+      <p style="margin:0;font-size:16px;line-height:2;color:#3b3833;text-wrap:pretty">当社の開発は、一般的な開発の数倍の時間がかかります。<br>その時間のすべてが、お客様の情報を守るために使われています。</p>
+      <div style="font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:18px">代表取締役　墨田 正筆</div>
+    </div>
+  </div>
+</section>
+<section>
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(56px,10vw,96px) 24px;display:flex;flex-direction:column;gap:40px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="font-size:13px;letter-spacing:.2em;color:#b8371f;font-weight:700">PRINCIPLES</div>
+      <h2 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:clamp(28px,4vw,40px);line-height:1.4">行動指針</h2>
+    </div>
+    <ol style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;border-top:1px solid #1d1c1a">
+      <li style="display:flex;flex-wrap:wrap;gap:8px 40px;padding:28px 0;border-bottom:1px solid #d9cfbb;align-items:baseline"><span style="font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:26px;flex:0 0 min(100%,16.5em)">一、写すな、書け。</span><span style="font-size:15px;line-height:1.9;color:#3b3833;flex:1;min-width:240px">他人のコードを写すときも、自分の頭を通してから書く。</span></li>
+      <li style="display:flex;flex-wrap:wrap;gap:8px 40px;padding:28px 0;border-bottom:1px solid #d9cfbb;align-items:baseline"><span style="font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:26px;flex:0 0 min(100%,16.5em)">一、消しゴムは二度まで。</span><span style="font-size:15px;line-height:1.9;color:#3b3833;flex:1;min-width:240px">三度消したくなった行は、設計から見直す。</span></li>
+      <li style="display:flex;flex-wrap:wrap;gap:8px 40px;padding:28px 0;border-bottom:1px solid #d9cfbb;align-items:baseline"><span style="font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:26px;flex:0 0 min(100%,16.5em)">一、読めない字は、脆弱性である。</span><span style="font-size:15px;line-height:1.9;color:#3b3833;flex:1;min-width:240px">入力課が読み違える字は、いずれ誰かが読み違える。</span></li>
+      <li style="display:flex;flex-wrap:wrap;gap:8px 40px;padding:28px 0;border-bottom:1px solid #d9cfbb;align-items:baseline"><span style="font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:26px;flex:0 0 min(100%,16.5em)">一、原本は金庫へ、写しは心へ。</span><span style="font-size:15px;line-height:1.9;color:#3b3833;flex:1;min-width:240px">書き終えた原稿はその日のうちに金庫へ納める。</span></li>
+      <li style="display:flex;flex-wrap:wrap;gap:8px 40px;padding:28px 0;border-bottom:1px solid #d9cfbb;align-items:baseline"><span style="font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:26px;flex:0 0 min(100%,16.5em)">一、急ぐ案件ほど、楷書で。</span><span style="font-size:15px;line-height:1.9;color:#3b3833;flex:1;min-width:240px">崩し字は、急いだ証拠として残る。</span></li>
+    </ol>
+  </div>
+</section>
+</sc-if>
+
+<!-- ============ SERVICE ============ -->
+<sc-if value="{{ is.service }}" hint-placeholder-val="{{ false }}">
+<section style="background-color:#efe9dc;background-image:linear-gradient(rgba(184,55,31,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(184,55,31,.10) 1px,transparent 1px);background-size:28px 28px;border-bottom:1px solid #1d1c1a">
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(48px,9vw,64px) 24px clamp(56px,10vw,56px);display:flex;flex-direction:column;gap:16px">
+    <div style="font-size:13px;color:#4a463f;display:flex;gap:8px"><a href="#/" onClick="{{ go.home }}">ホーム</a><span>／</span><span>サービス</span></div>
+    <div style="font-size:13px;letter-spacing:.2em;color:#b8371f;font-weight:700">SERVICE</div>
+    <h1 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:clamp(36px,6vw,60px);line-height:1.3;letter-spacing:.04em">サービス</h1>
+    <p style="margin:0;font-size:16px;line-height:2;color:#3b3833;max-width:40em">すべてのサービスは、鉛筆・赤ペン・原稿用紙の三点で提供しています。料金はいずれも税抜、原稿用紙代を含みます。</p>
+  </div>
+</section>
+<section>
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(56px,10vw,80px) 24px 112px;display:flex;flex-direction:column;gap:24px">
+    <div style="display:flex;flex-wrap:wrap;gap:24px 48px;padding:48px 0;border-top:1px solid #1d1c1a">
+      <div style="flex:1 1 240px;display:flex;flex-direction:column;gap:12px"><span style="font-family:'Shippori Mincho B1',serif;font-size:18px;color:#b8371f">01</span><h2 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:30px;line-height:1.4">手書き受託開発</h2></div>
+      <div style="display:flex;flex-direction:column;gap:16px;flex:2 1 320px;min-width:0">
+        <p style="margin:0;font-size:16px;line-height:2;color:#3b3833;text-wrap:pretty">業務システム、Webシステム、窓口予約、在庫管理など。要件の聞き取りから納品まで、すべての工程を手で行います。外部ライブラリは使用せず、必要な処理はすべて当社で書き起こします。</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px 32px;font-size:14px;padding-top:12px;border-top:1px dashed #cdbfa5"><span><b>料金</b>　1行 ¥1,800〜（査読・清書込み）</span><span><b>期間目安</b>　12か月〜</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:24px 48px;padding:48px 0;border-top:1px solid #1d1c1a">
+      <div style="flex:1 1 240px;display:flex;flex-direction:column;gap:12px"><span style="font-family:'Shippori Mincho B1',serif;font-size:18px;color:#b8371f">02</span><h2 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:30px;line-height:1.4">既存システムの書き起こし</h2></div>
+      <div style="display:flex;flex-direction:column;gap:16px;flex:2 1 320px;min-width:0">
+        <p style="margin:0;font-size:16px;line-height:2;color:#3b3833;text-wrap:pretty">打鍵で作られた既存のソースコードを印刷し、全行を手で書き写します。書き写す過程で見つかった不要な処理や危うい箇所は、赤ペンで記録したうえで修正します。保守をお引き受けする前提となるサービスです。</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px 32px;font-size:14px;padding-top:12px;border-top:1px dashed #cdbfa5"><span><b>料金</b>　1行 ¥900〜</span><span><b>期間目安</b>　1万行あたり約6か月</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:24px 48px;padding:48px 0;border-top:1px solid #1d1c1a">
+      <div style="flex:1 1 240px;display:flex;flex-direction:column;gap:12px"><span style="font-family:'Shippori Mincho B1',serif;font-size:18px;color:#b8371f">03</span><h2 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:30px;line-height:1.4">赤ペンセキュリティ監査</h2></div>
+      <div style="display:flex;flex-direction:column;gap:16px;flex:2 1 320px;min-width:0">
+        <p style="margin:0;font-size:16px;line-height:2;color:#3b3833;text-wrap:pretty">御社のソースコードを印刷し、3名の赤ペン査読員が順に読みます。指摘は朱で書き込み、監査報告書とともに添削済みの印刷物一式をお返しします。</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px 32px;font-size:14px;padding-top:12px;border-top:1px dashed #cdbfa5"><span><b>料金</b>　1,000行あたり ¥120,000〜</span><span><b>納品物</b>　添削済み印刷物・手書き報告書</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:24px 48px;padding:48px 0;border-top:1px solid #1d1c1a;border-bottom:1px solid #1d1c1a">
+      <div style="flex:1 1 240px;display:flex;flex-direction:column;gap:12px"><span style="font-family:'Shippori Mincho B1',serif;font-size:18px;color:#b8371f">04</span><h2 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:30px;line-height:1.4">写経研修</h2></div>
+      <div style="display:flex;flex-direction:column;gap:16px;flex:2 1 320px;min-width:0">
+        <p style="margin:0;font-size:16px;line-height:2;color:#3b3833;text-wrap:pretty">当社が選定した安全なコードを、受講者が原稿用紙に一字ずつ写します。新人研修、セキュリティ研修、インシデント後の再発防止研修としてご利用いただいています。</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px 32px;font-size:14px;padding-top:12px;border-top:1px dashed #cdbfa5"><span><b>料金</b>　1名1日 ¥38,000（鉛筆・原稿用紙込み）</span><span><b>定員</b>　1回12名まで</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+</sc-if>
+
+<!-- ============ PROCESS ============ -->
+<sc-if value="{{ is.process }}" hint-placeholder-val="{{ false }}">
+<section style="background-color:#efe9dc;background-image:linear-gradient(rgba(184,55,31,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(184,55,31,.10) 1px,transparent 1px);background-size:28px 28px;border-bottom:1px solid #1d1c1a">
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(48px,9vw,64px) 24px clamp(56px,10vw,56px);display:flex;flex-direction:column;gap:16px">
+    <div style="font-size:13px;color:#4a463f;display:flex;gap:8px"><a href="#/" onClick="{{ go.home }}">ホーム</a><span>／</span><span>開発工程</span></div>
+    <div style="font-size:13px;letter-spacing:.2em;color:#b8371f;font-weight:700">PROCESS</div>
+    <h1 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:clamp(36px,6vw,60px);line-height:1.3;letter-spacing:.04em">開発工程</h1>
+    <p style="margin:0;font-size:16px;line-height:2;color:#3b3833;max-width:40em">ご依頼から納品まで、八つの工程を経ます。いずれの工程も省略はいたしません。</p>
+  </div>
+</section>
+<section>
+  <div style="max-width:960px;margin:0 auto;padding:clamp(56px,10vw,88px) 24px;display:flex;flex-direction:column">
+    <div style="display:grid;grid-template-columns:64px minmax(0,1fr);gap:24px;padding:28px 0;border-bottom:1px solid #d9cfbb"><div style="width:56px;height:56px;border:2px solid #b8371f;border-radius:50%;color:#b8371f;display:flex;align-items:center;justify-content:center;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:20px">01</div><div style="display:flex;flex-direction:column;gap:8px"><h3 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:24px">聞き取り</h3><p style="margin:0;font-size:15px;line-height:1.95;color:#3b3833">対面にてご要望を伺います。議事録は二枚複写の伝票に記入し、一枚をその場でお渡しします。</p></div></div>
+    <div style="display:grid;grid-template-columns:64px minmax(0,1fr);gap:24px;padding:28px 0;border-bottom:1px solid #d9cfbb"><div style="width:56px;height:56px;border:2px solid #b8371f;border-radius:50%;color:#b8371f;display:flex;align-items:center;justify-content:center;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:20px">02</div><div style="display:flex;flex-direction:column;gap:8px"><h3 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:24px">設計</h3><p style="margin:0;font-size:15px;line-height:1.95;color:#3b3833">5mm方眼紙に、画面と処理の流れを鉛筆で描きます。定規の使用は認めています。</p></div></div>
+    <div style="display:grid;grid-template-columns:64px minmax(0,1fr);gap:24px;padding:28px 0;border-bottom:1px solid #d9cfbb"><div style="width:56px;height:56px;border:2px solid #b8371f;border-radius:50%;color:#b8371f;display:flex;align-items:center;justify-content:center;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:20px">03</div><div style="display:flex;flex-direction:column;gap:8px"><h3 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:24px">下書き</h3><p style="margin:0;font-size:15px;line-height:1.95;color:#3b3833">2Bの鉛筆で、筆記堂式コード用原稿用紙に一行ずつ書きます。コピー＆ペーストは物理的に不可能です。</p></div></div>
+    <div style="display:grid;grid-template-columns:64px minmax(0,1fr);gap:24px;padding:28px 0;border-bottom:1px solid #d9cfbb"><div style="width:56px;height:56px;border:2px solid #b8371f;border-radius:50%;color:#b8371f;display:flex;align-items:center;justify-content:center;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:20px">04</div><div style="display:flex;flex-direction:column;gap:8px"><h3 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:24px">赤ペン査読</h3><p style="margin:0;font-size:15px;line-height:1.95;color:#3b3833">3名の査読員が順に読み、朱で指摘を入れます。読みにくい字も指摘の対象です。</p></div></div>
+    <div style="display:grid;grid-template-columns:64px minmax(0,1fr);gap:24px;padding:28px 0;border-bottom:1px solid #d9cfbb"><div style="width:56px;height:56px;border:2px solid #b8371f;border-radius:50%;color:#b8371f;display:flex;align-items:center;justify-content:center;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:20px">05</div><div style="display:flex;flex-direction:column;gap:8px"><h3 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:24px">清書</h3><p style="margin:0;font-size:15px;line-height:1.95;color:#3b3833">指摘を反映し、HBの鉛筆で清書します。消しゴムの使用は一行につき二回までと定めています。</p></div></div>
+    <div style="display:grid;grid-template-columns:64px minmax(0,1fr);gap:24px;padding:28px 0;border-bottom:1px solid #d9cfbb"><div style="width:56px;height:56px;border:2px solid #b8371f;border-radius:50%;color:#b8371f;display:flex;align-items:center;justify-content:center;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:20px">06</div><div style="display:flex;flex-direction:column;gap:8px"><h3 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:24px">二重打鍵</h3><p style="margin:0;font-size:15px;line-height:1.95;color:#3b3833">入力課の2名が別室で同じ原稿を打鍵し、結果を照合します。一致した行のみを採用します。入力端末はネットワークに接続されていません。</p></div></div>
+    <div style="display:grid;grid-template-columns:64px minmax(0,1fr);gap:24px;padding:28px 0;border-bottom:1px solid #d9cfbb"><div style="width:56px;height:56px;border:2px solid #b8371f;border-radius:50%;color:#b8371f;display:flex;align-items:center;justify-content:center;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:20px">07</div><div style="display:flex;flex-direction:column;gap:8px"><h3 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:24px">試験</h3><p style="margin:0;font-size:15px;line-height:1.95;color:#3b3833">試験項目も手書きです。結果は一項目ずつ合否印で記録します。</p></div></div>
+    <div style="display:grid;grid-template-columns:64px minmax(0,1fr);gap:24px;padding:28px 0"><div style="width:56px;height:56px;background:#b8371f;border-radius:50%;color:#f3eee3;display:flex;align-items:center;justify-content:center;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:20px">08</div><div style="display:flex;flex-direction:column;gap:8px"><h3 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:24px">納品</h3><p style="margin:0;font-size:15px;line-height:1.95;color:#3b3833">稼働するシステムと、製本したソース原本の写し一式をお届けします。原本は当社の金庫で永年保管します。</p></div></div>
+  </div>
+</section>
+<section style="background:#1d1c1a;color:#f3eee3">
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(56px,10vw,88px) 24px;display:flex;flex-direction:column;gap:40px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="font-size:13px;letter-spacing:.2em;color:#e07a5f;font-weight:700">TOOLS</div>
+      <h2 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:clamp(28px,4vw,40px)">使用する道具</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:32px">
+      <div style="display:flex;flex-direction:column;gap:10px;border-top:1px solid #5a564f;padding-top:20px"><span style="font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:21px">鉛筆（2B・HB）</span><span style="font-size:14px;line-height:1.85;color:#d9d2c3">下書きは2B、清書はHB。シャープペンシルは芯が折れた際の誤記を防ぐため使用しません。</span></div>
+      <div style="display:flex;flex-direction:column;gap:10px;border-top:1px solid #5a564f;padding-top:20px"><span style="font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:21px">コード用原稿用紙</span><span style="font-size:14px;line-height:1.85;color:#d9d2c3">80桁×40行の自社製。インデントを揃えるための縦罫が4桁ごとに入っています。</span></div>
+      <div style="display:flex;flex-direction:column;gap:10px;border-top:1px solid #5a564f;padding-top:20px"><span style="font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:21px">赤ペン（朱）</span><span style="font-size:14px;line-height:1.85;color:#d9d2c3">査読専用。査読員以外の社員が持ち歩くことは禁止しています。</span></div>
+      <div style="display:flex;flex-direction:column;gap:10px;border-top:1px solid #5a564f;padding-top:20px"><span style="font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:21px">日付印・綴じ紐</span><span style="font-size:14px;line-height:1.85;color:#d9d2c3">版の管理に使います。綴じ紐の色で、開発中・査読中・確定を区別します。</span></div>
+    </div>
+  </div>
+</section>
+<section>
+  <div style="max-width:960px;margin:0 auto;padding:clamp(56px,10vw,96px) 24px 112px;display:flex;flex-direction:column;gap:32px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="font-size:13px;letter-spacing:.2em;color:#b8371f;font-weight:700">FAQ</div>
+      <h2 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:clamp(28px,4vw,40px)">よくあるご質問</h2>
+    </div>
+    <div style="display:flex;flex-direction:column;border-top:1px solid #1d1c1a">
+      <details style="border-bottom:1px solid #d9cfbb;padding:24px 0"><summary style="display:flex;gap:16px;font-weight:700;font-size:17px;line-height:1.6"><span style="font-family:'Shippori Mincho B1',serif;color:#b8371f">問</span>手書きだと、開発期間が長くなりませんか。</summary><p style="margin:16px 0 0 34px;font-size:15px;line-height:1.95;color:#3b3833">なります。一般的な開発の3〜5倍を目安にしてください。その時間は、すべて品質の確認に使われています。</p></details>
+      <details style="border-bottom:1px solid #d9cfbb;padding:24px 0"><summary style="display:flex;gap:16px;font-weight:700;font-size:17px;line-height:1.6"><span style="font-family:'Shippori Mincho B1',serif;color:#b8371f">問</span>Gitなどのバージョン管理は使っていますか。</summary><p style="margin:16px 0 0 34px;font-size:15px;line-height:1.95;color:#3b3833">原稿用紙の右上に日付印を押し、版ごとに綴じ紐で管理しています。差分は赤ペンで記録され、改ざんは筆跡鑑定で検知できます。</p></details>
+      <details style="border-bottom:1px solid #d9cfbb;padding:24px 0"><summary style="display:flex;gap:16px;font-weight:700;font-size:17px;line-height:1.6"><span style="font-family:'Shippori Mincho B1',serif;color:#b8371f">問</span>生成AIは使っていますか。</summary><p style="margin:16px 0 0 34px;font-size:15px;line-height:1.95;color:#3b3833">一切使用していません。2023年に「生成AI不使用宣言」を行いました。</p></details>
+      <details style="border-bottom:1px solid #d9cfbb;padding:24px 0"><summary style="display:flex;gap:16px;font-weight:700;font-size:17px;line-height:1.6"><span style="font-family:'Shippori Mincho B1',serif;color:#b8371f">問</span>他社が作ったシステムの保守は依頼できますか。</summary><p style="margin:16px 0 0 34px;font-size:15px;line-height:1.95;color:#3b3833">「既存システムの書き起こし」で全行を手で書き写したうえで、お引き受けします。</p></details>
+      <details style="border-bottom:1px solid #d9cfbb;padding:24px 0"><summary style="display:flex;gap:16px;font-weight:700;font-size:17px;line-height:1.6"><span style="font-family:'Shippori Mincho B1',serif;color:#b8371f">問</span>オンラインでの打ち合わせは可能ですか。</summary><p style="margin:16px 0 0 34px;font-size:15px;line-height:1.95;color:#3b3833">原則として、対面またはお手紙でお願いしております。</p></details>
+    </div>
+  </div>
+</section>
+</sc-if>
+
+<!-- ============ WORKS ============ -->
+<sc-if value="{{ is.works }}" hint-placeholder-val="{{ false }}">
+<section style="background-color:#efe9dc;background-image:linear-gradient(rgba(184,55,31,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(184,55,31,.10) 1px,transparent 1px);background-size:28px 28px;border-bottom:1px solid #1d1c1a">
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(48px,9vw,64px) 24px clamp(56px,10vw,56px);display:flex;flex-direction:column;gap:16px">
+    <div style="font-size:13px;color:#4a463f;display:flex;gap:8px"><a href="#/" onClick="{{ go.home }}">ホーム</a><span>／</span><span>導入事例</span></div>
+    <div style="font-size:13px;letter-spacing:.2em;color:#b8371f;font-weight:700">WORKS</div>
+    <h1 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:clamp(36px,6vw,60px);line-height:1.3;letter-spacing:.04em">導入事例</h1>
+  </div>
+</section>
+<section>
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(56px,10vw,80px) 24px 112px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:24px">
+    <article style="background:#fbf8f1;border:1px solid #cdbfa5;display:flex;flex-direction:column">
+      <img src="images/works-n.jpg" alt="N市の窓口に置かれた手書きソースコードの原本" style="display:block;width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center 68%">
+      <div style="padding:32px;display:flex;flex-direction:column;gap:18px">
+        <div style="font-size:13px;color:#4a463f">自治体｜窓口予約システム</div>
+        <h2 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:26px">N市 様</h2>
+        <p style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:600;font-size:19px;line-height:1.75">「納期は長かったが、議会で原本を見せられたのが大きかった。」</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px 28px;font-size:14px;padding-top:16px;border-top:1px dashed #cdbfa5"><span>開発期間 26か月</span><span>総行数 4,820行</span><span>稼働後の漏えい 0件</span></div>
+      </div>
+    </article>
+    <article style="background:#fbf8f1;border:1px solid #cdbfa5;display:flex;flex-direction:column">
+      <img src="images/works-m.jpg" alt="漬物蔵の作業台に置かれた台帳と原稿用紙" style="display:block;width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center 72%">
+      <div style="padding:32px;display:flex;flex-direction:column;gap:18px">
+        <div style="font-size:13px;color:#4a463f">食品製造｜在庫管理システム</div>
+        <h2 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:26px">M社 様</h2>
+        <p style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:600;font-size:19px;line-height:1.75">「樽の数と同じくらい、正確です。」</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px 28px;font-size:14px;padding-top:16px;border-top:1px dashed #cdbfa5"><span>開発期間 14か月</span><span>総行数 2,310行</span><span>稼働後の漏えい 0件</span></div>
+      </div>
+    </article>
+    <article style="background:#fbf8f1;border:1px solid #cdbfa5;display:flex;flex-direction:column">
+      <img src="images/works-s.jpg" alt="旅館の帳場に置かれた宿帳" style="display:block;width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center 58%">
+      <div style="padding:32px;display:flex;flex-direction:column;gap:18px">
+        <div style="font-size:13px;color:#4a463f">宿泊業｜予約・宿帳管理</div>
+        <h2 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:26px">S旅館 様</h2>
+        <p style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:600;font-size:19px;line-height:1.75">「宿帳をデジタル化するなら、手で書く会社に頼みたかった。」</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px 28px;font-size:14px;padding-top:16px;border-top:1px dashed #cdbfa5"><span>開発期間 18か月</span><span>総行数 3,140行</span><span>稼働後の漏えい 0件</span></div>
+      </div>
+    </article>
+    <article style="background:#fbf8f1;border:1px solid #cdbfa5;display:flex;flex-direction:column">
+      <img src="images/works-h.jpg" alt="金庫から取り出される原稿用紙の束" style="display:block;width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center 50%">
+      <div style="padding:32px;display:flex;flex-direction:column;gap:18px">
+        <div style="font-size:13px;color:#4a463f">金融｜顧客台帳システム</div>
+        <h2 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:26px">H信用組合 様</h2>
+        <p style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:600;font-size:19px;line-height:1.75">「監査で原本の閲覧を求められた際、金庫から即日出してくれた。」</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px 28px;font-size:14px;padding-top:16px;border-top:1px dashed #cdbfa5"><span>開発期間 41か月</span><span>総行数 12,600行</span><span>稼働後の漏えい 0件</span></div>
+      </div>
+    </article>
+  </div>
+</section>
+</sc-if>
+
+<!-- ============ SECURITY ============ -->
+<sc-if value="{{ is.security }}" hint-placeholder-val="{{ false }}">
+<section style="background-color:#efe9dc;background-image:linear-gradient(rgba(184,55,31,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(184,55,31,.10) 1px,transparent 1px);background-size:28px 28px;border-bottom:1px solid #1d1c1a">
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(48px,9vw,64px) 24px clamp(56px,10vw,56px);display:flex;flex-direction:column;gap:16px">
+    <div style="font-size:13px;color:#4a463f;display:flex;gap:8px"><a href="#/" onClick="{{ go.home }}">ホーム</a><span>／</span><span>セキュリティへの取り組み</span></div>
+    <div style="font-size:13px;letter-spacing:.2em;color:#b8371f;font-weight:700">SECURITY</div>
+    <h1 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:clamp(36px,6vw,60px);line-height:1.3;letter-spacing:.04em">セキュリティへの取り組み</h1>
+    <p style="margin:0;font-size:16px;line-height:2;color:#3b3833;max-width:40em">情報漏えいの多くは、ネットワークの向こう側から起きます。当社のソースコードは、紙の上にあります。</p>
+  </div>
+</section>
+<section>
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(56px,10vw,88px) 24px 40px;display:flex;flex-direction:column;gap:24px">
+    <div style="display:flex;flex-wrap:wrap;align-items:stretch;gap:12px;font-size:15px">
+      <div style="flex:1;min-width:140px;border:1px solid #1d1c1a;background:#fbf8f1;padding:20px;display:flex;flex-direction:column;gap:6px"><span style="font-size:12px;color:#4a463f">工程 03–05</span><b style="font-family:'Shippori Mincho B1',serif;font-size:19px">原稿用紙（原本）</b></div>
+      <div style="display:flex;align-items:center;color:#b8371f;font-size:22px">→</div>
+      <div style="flex:1;min-width:140px;border:2px solid #b8371f;background:#fbf8f1;padding:20px;display:flex;flex-direction:column;gap:6px"><span style="font-size:12px;color:#4a463f">三重施錠</span><b style="font-family:'Shippori Mincho B1',serif;font-size:19px">耐火金庫</b></div>
+      <div style="display:flex;align-items:center;color:#b8371f;font-size:22px">→</div>
+      <div style="flex:1;min-width:140px;border:1px solid #1d1c1a;background:#fbf8f1;padding:20px;display:flex;flex-direction:column;gap:6px"><span style="font-size:12px;color:#4a463f">ネットワーク非接続</span><b style="font-family:'Shippori Mincho B1',serif;font-size:19px">入力課（二重打鍵）</b></div>
+      <div style="display:flex;align-items:center;color:#b8371f;font-size:22px">→</div>
+      <div style="flex:1;min-width:140px;border:1px solid #1d1c1a;background:#1d1c1a;color:#f3eee3;padding:20px;display:flex;flex-direction:column;gap:6px"><span style="font-size:12px;color:#d9d2c3">納品</span><b style="font-family:'Shippori Mincho B1',serif;font-size:19px">お客様の実行環境</b></div>
+    </div>
+    <p style="margin:0;font-size:14px;color:#4a463f">原本とネットワークが接する地点は、ありません。</p>
+  </div>
+</section>
+<section>
+  <div style="max-width:1200px;margin:0 auto;padding:48px 24px 112px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:0 48px">
+    <div style="display:flex;flex-direction:column;gap:10px;padding:32px 0;border-top:1px solid #1d1c1a"><h3 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:22px">原本の物理保管</h3><p style="margin:0;font-size:15px;line-height:1.95;color:#3b3833">原稿は書き終えたその日のうちに耐火金庫へ納めます。三つの鍵は代表・総務部長・査読主任が別々に保管しています。</p></div>
+    <div style="display:flex;flex-direction:column;gap:10px;padding:32px 0;border-top:1px solid #1d1c1a"><h3 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:22px">ネットワーク非接続の入力端末</h3><p style="margin:0;font-size:15px;line-height:1.95;color:#3b3833">入力課の端末は外部と一切つながっていません。USB端子は樹脂で封止しています。</p></div>
+    <div style="display:flex;flex-direction:column;gap:10px;padding:32px 0;border-top:1px solid #1d1c1a"><h3 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:22px">外部ライブラリ不使用</h3><p style="margin:0;font-size:15px;line-height:1.95;color:#3b3833">必要な処理はすべて当社で書き起こします。依存関係に由来する脆弱性は、構造上発生しません。</p></div>
+    <div style="display:flex;flex-direction:column;gap:10px;padding:32px 0;border-top:1px solid #1d1c1a"><h3 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:22px">生成AI不使用</h3><p style="margin:0;font-size:15px;line-height:1.95;color:#3b3833">学習データに由来するコードが混入する余地はありません。全行の書き手を特定できます。</p></div>
+    <div style="display:flex;flex-direction:column;gap:10px;padding:32px 0;border-top:1px solid #1d1c1a"><h3 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:22px">筆跡登録制度</h3><p style="margin:0;font-size:15px;line-height:1.95;color:#3b3833">全社員の筆跡を登録しています。原稿に第三者の筆跡が混じった場合、査読工程で検知します。</p></div>
+    <div style="display:flex;flex-direction:column;gap:10px;padding:32px 0;border-top:1px solid #1d1c1a"><h3 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:22px">書き損じの廃棄</h3><p style="margin:0;font-size:15px;line-height:1.95;color:#3b3833">書き損じた原稿用紙はクロスカット裁断のうえ、溶解処理します。処理の際は二名が立ち会います。</p></div>
+    <p style="grid-column:1 / -1;margin:16px 0 0;font-size:13px;color:#4a463f;line-height:1.8">上記は当社基準「筆記堂 手書きセキュリティ基準 HSS-2026」に基づいて運用しています。</p>
+  </div>
+</section>
+</sc-if>
+
+<!-- ============ COMPANY ============ -->
+<sc-if value="{{ is.company }}" hint-placeholder-val="{{ false }}">
+<section style="background-color:#efe9dc;background-image:linear-gradient(rgba(184,55,31,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(184,55,31,.10) 1px,transparent 1px);background-size:28px 28px;border-bottom:1px solid #1d1c1a">
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(48px,9vw,64px) 24px clamp(56px,10vw,56px);display:flex;flex-direction:column;gap:16px">
+    <div style="font-size:13px;color:#4a463f;display:flex;gap:8px"><a href="#/" onClick="{{ go.home }}">ホーム</a><span>／</span><span>会社情報</span></div>
+    <div style="font-size:13px;letter-spacing:.2em;color:#b8371f;font-weight:700">COMPANY</div>
+    <h1 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:clamp(36px,6vw,60px);line-height:1.3;letter-spacing:.04em">会社情報</h1>
+  </div>
+</section>
+<section>
+  <div style="max-width:960px;margin:0 auto;padding:clamp(56px,10vw,88px) 24px;display:flex;flex-direction:column;gap:32px">
+    <h2 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:clamp(26px,3.6vw,34px)">会社概要</h2>
+    <dl style="margin:0;display:grid;grid-template-columns:minmax(96px,180px) minmax(0,1fr);border-top:1px solid #1d1c1a;font-size:15px;line-height:1.85">
+      <dt style="padding:18px 0;border-bottom:1px solid #d9cfbb;font-weight:700">商号</dt><dd style="margin:0;padding:18px 0;border-bottom:1px solid #d9cfbb">株式会社筆記堂システムズ（Hikkido Systems Co., Ltd.）</dd>
+      <dt style="padding:18px 0;border-bottom:1px solid #d9cfbb;font-weight:700">設立</dt><dd style="margin:0;padding:18px 0;border-bottom:1px solid #d9cfbb">1989年4月1日</dd>
+      <dt style="padding:18px 0;border-bottom:1px solid #d9cfbb;font-weight:700">代表者</dt><dd style="margin:0;padding:18px 0;border-bottom:1px solid #d9cfbb">代表取締役　墨田 正筆</dd>
+      <dt style="padding:18px 0;border-bottom:1px solid #d9cfbb;font-weight:700">資本金</dt><dd style="margin:0;padding:18px 0;border-bottom:1px solid #d9cfbb">3,000万円</dd>
+      <dt style="padding:18px 0;border-bottom:1px solid #d9cfbb;font-weight:700">従業員数</dt><dd style="margin:0;padding:18px 0;border-bottom:1px solid #d9cfbb">62名（手書きプログラマー34名、赤ペン査読員12名、入力課10名、総務6名）</dd>
+      <dt style="padding:18px 0;border-bottom:1px solid #d9cfbb;font-weight:700">所在地</dt><dd style="margin:0;padding:18px 0;border-bottom:1px solid #d9cfbb">〒101-0000　東京都千代田区神田文具町1-2-3　筆記堂ビル2階</dd>
+      <dt style="padding:18px 0;border-bottom:1px solid #d9cfbb;font-weight:700">電話</dt><dd style="margin:0;padding:18px 0;border-bottom:1px solid #d9cfbb">03-0000-1989（平日 9:00〜17:00）</dd>
+      <dt style="padding:18px 0;border-bottom:1px solid #d9cfbb;font-weight:700">FAX</dt><dd style="margin:0;padding:18px 0;border-bottom:1px solid #d9cfbb">03-0000-1990（24時間受付）</dd>
+      <dt style="padding:18px 0;border-bottom:1px solid #d9cfbb;font-weight:700">事業内容</dt><dd style="margin:0;padding:18px 0;border-bottom:1px solid #d9cfbb">手書きによるソフトウェアの受託開発、既存システムの書き起こし、赤ペンセキュリティ監査、写経研修、コード用原稿用紙の製造・販売</dd>
+      <dt style="padding:18px 0;border-bottom:1px solid #d9cfbb;font-weight:700">取引銀行</dt><dd style="margin:0;padding:18px 0;border-bottom:1px solid #d9cfbb">A銀行</dd>
+    </dl>
+  </div>
+</section>
+<section style="background:#ebe4d4;border-top:1px solid #d9cfbb;border-bottom:1px solid #d9cfbb">
+  <div style="max-width:960px;margin:0 auto;padding:clamp(56px,10vw,88px) 24px;display:flex;flex-direction:column;gap:32px">
+    <h2 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:clamp(26px,3.6vw,34px)">沿革</h2>
+    <div style="display:flex;flex-direction:column;border-left:2px solid #b8371f;margin-left:6px">
+      <div style="display:grid;grid-template-columns:88px minmax(0,1fr);gap:16px;padding:0 0 28px 24px;position:relative"><span style="position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:#b8371f"></span><b style="font-family:'Shippori Mincho B1',serif;font-size:18px">1989</b><span style="font-size:15px;line-height:1.85">神田の文具店の二階にて、3名で創業。</span></div>
+      <div style="display:grid;grid-template-columns:88px minmax(0,1fr);gap:16px;padding:0 0 28px 24px;position:relative"><span style="position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:#b8371f"></span><b style="font-family:'Shippori Mincho B1',serif;font-size:18px">1999</b><span style="font-size:15px;line-height:1.85">2000年問題対応として、取引先の全1万2千行を手書きで点検。</span></div>
+      <div style="display:grid;grid-template-columns:88px minmax(0,1fr);gap:16px;padding:0 0 28px 24px;position:relative"><span style="position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:#b8371f"></span><b style="font-family:'Shippori Mincho B1',serif;font-size:18px">2004</b><span style="font-size:15px;line-height:1.85">「筆記堂式コード用原稿用紙 80桁」を自社開発。</span></div>
+      <div style="display:grid;grid-template-columns:88px minmax(0,1fr);gap:16px;padding:0 0 28px 24px;position:relative"><span style="position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:#b8371f"></span><b style="font-family:'Shippori Mincho B1',serif;font-size:18px">2012</b><span style="font-size:15px;line-height:1.85">入力課を新設し、二重打鍵方式を確立。</span></div>
+      <div style="display:grid;grid-template-columns:88px minmax(0,1fr);gap:16px;padding:0 0 28px 24px;position:relative"><span style="position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:#b8371f"></span><b style="font-family:'Shippori Mincho B1',serif;font-size:18px">2019</b><span style="font-size:15px;line-height:1.85">原本保管用の耐火金庫を三重施錠に増強。</span></div>
+      <div style="display:grid;grid-template-columns:88px minmax(0,1fr);gap:16px;padding:0 0 28px 24px;position:relative"><span style="position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:#b8371f"></span><b style="font-family:'Shippori Mincho B1',serif;font-size:18px">2023</b><span style="font-size:15px;line-height:1.85">「生成AI不使用宣言」を発表。</span></div>
+      <div style="display:grid;grid-template-columns:88px minmax(0,1fr);gap:16px;padding:0 0 0 24px;position:relative"><span style="position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:#b8371f"></span><b style="font-family:'Shippori Mincho B1',serif;font-size:18px">2026</b><span style="font-size:15px;line-height:1.85">当社初のWebサイトを開設。</span></div>
+    </div>
+  </div>
+</section>
+<section>
+  <div style="max-width:960px;margin:0 auto;padding:clamp(56px,10vw,88px) 24px 112px;display:flex;flex-direction:column;gap:24px">
+    <h2 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:clamp(26px,3.6vw,34px)">アクセス</h2>
+    <div style="background:#fbf8f1;border:1px solid #cdbfa5;max-width:720px;width:100%">
+      <svg viewBox="0 0 600 400" role="img" aria-label="神田駅北口から筆記堂ビルまでの案内略図" style="display:block;width:100%;height:auto;font-family:'Yomogi',cursive">
+        <defs><filter id="hk-rough"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7"></feTurbulence><feDisplacementMap in="SourceGraphic" scale="3.5"></feDisplacementMap></filter></defs>
+        <g filter="url(#hk-rough)" fill="none" stroke="#3a3936" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M-10 158 C 150 162, 380 155, 610 160" stroke-width="2.2"></path>
+          <path d="M-10 184 C 150 186, 300 181, 418 183 M446 184 C 500 185, 560 182, 610 185" stroke-width="2.2"></path>
+          <path d="M418 183 C 420 260, 416 330, 419 410" stroke-width="2.2"></path>
+          <path d="M446 184 C 444 260, 448 330, 445 410" stroke-width="2.2"></path>
+          <path d="M128 -10 C 140 120, 155 280, 172 410" stroke="#1d1c1a" stroke-width="10"></path>
+          <path d="M128 -10 C 140 120, 155 280, 172 410" stroke="#fbf8f1" stroke-width="5" stroke-dasharray="16 12"></path>
+          <rect x="128" y="196" width="40" height="88" rx="3" fill="#fbf8f1" stroke-width="2.4" transform="rotate(-5 148 240)"></rect>
+          <path d="M175 171 L431 171 L431 284 L462 284" stroke="#c0392b" stroke-width="3.5" stroke-dasharray="1 9"></path>
+          <path d="M562 92 L562 42 M552 56 L562 40 L572 56" stroke-width="2.4"></path>
+        </g>
+        <rect x="466" y="250" width="66" height="66" rx="4" fill="#b8371f" transform="rotate(-4 499 283)"></rect>
+        <text x="499" y="296" text-anchor="middle" fill="#f3eee3" font-family="'Shippori Mincho B1',serif" font-weight="800" font-size="38" transform="rotate(-4 499 283)">筆</text>
+        <text x="22" y="42" fill="#1d1c1a" font-size="20">案内略図</text>
+        <text x="560" y="32" fill="#1d1c1a" font-size="18" text-anchor="middle">N</text>
+        <text x="34" y="250" fill="#1d1c1a" font-size="28" transform="rotate(-3 70 240)">神田駅</text>
+        <text x="178" y="146" fill="#1d1c1a" font-size="18">北口</text>
+        <text x="268" y="148" fill="#c0392b" font-size="22" transform="rotate(-4 305 140)">徒歩6分</text>
+        <text x="510" y="348" fill="#1d1c1a" font-size="22" text-anchor="middle" transform="rotate(2 510 340)">筆記堂ビル 2階</text>
+        <text x="512" y="372" fill="#4a463f" font-size="15" text-anchor="middle">（1階は文具店）</text>
+        <text x="590" y="392" fill="#4a463f" font-size="13" text-anchor="end">※縮尺・方角は正確ではありません</text>
+      </svg>
+    </div>
+    <p style="margin:0;font-size:15px;line-height:1.9">神田駅 北口より徒歩6分。一階の文具店の脇の階段をお上がりください。</p>
+  </div>
+</section>
+</sc-if>
+
+<!-- ============ RECRUIT ============ -->
+<sc-if value="{{ is.recruit }}" hint-placeholder-val="{{ false }}">
+<section style="background-color:#efe9dc;background-image:linear-gradient(rgba(184,55,31,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(184,55,31,.10) 1px,transparent 1px);background-size:28px 28px;border-bottom:1px solid #1d1c1a">
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(48px,9vw,64px) 24px clamp(56px,10vw,56px);display:flex;flex-direction:column;gap:16px">
+    <div style="font-size:13px;color:#4a463f;display:flex;gap:8px"><a href="#/" onClick="{{ go.home }}">ホーム</a><span>／</span><span>採用情報</span></div>
+    <div style="font-size:13px;letter-spacing:.2em;color:#b8371f;font-weight:700">RECRUIT</div>
+    <h1 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:clamp(36px,6vw,60px);line-height:1.3;letter-spacing:.04em">キーボードが打てなくても、<br>構いません。</h1>
+    <p style="margin:0;font-size:16px;line-height:2;color:#3b3833;max-width:40em">必要なのは、丁寧な字と、最後まで疑う心です。プログラミングの経験は問いません。入社後の写経研修で、半年かけて身につけていただきます。</p>
+  </div>
+</section>
+<section>
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(56px,10vw,88px) 24px;display:flex;flex-direction:column;gap:32px">
+    <h2 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:clamp(26px,3.6vw,34px)">募集職種</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:24px">
+      <div style="background:#fbf8f1;border:1px solid #cdbfa5;padding:32px;display:flex;flex-direction:column;gap:14px"><h3 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:23px">手書きプログラマー</h3><p style="margin:0;font-size:15px;line-height:1.9;color:#3b3833;flex:1">楷書で一日400行以上を丁寧に書けること。</p><div style="font-size:14px;font-weight:700;padding-top:12px;border-top:1px dashed #cdbfa5">月給 28万円〜</div></div>
+      <div style="background:#fbf8f1;border:1px solid #cdbfa5;padding:32px;display:flex;flex-direction:column;gap:14px"><h3 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:23px">赤ペン査読員</h3><p style="margin:0;font-size:15px;line-height:1.9;color:#3b3833;flex:1">他人の字とロジックを、最後の一行まで疑えること。</p><div style="font-size:14px;font-weight:700;padding-top:12px;border-top:1px dashed #cdbfa5">月給 30万円〜</div></div>
+      <div style="background:#fbf8f1;border:1px solid #cdbfa5;padding:32px;display:flex;flex-direction:column;gap:14px"><h3 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:23px">入力課オペレーター</h3><p style="margin:0;font-size:15px;line-height:1.9;color:#3b3833;flex:1">原稿にない文字を、一文字も打たないこと。</p><div style="font-size:14px;font-weight:700;padding-top:12px;border-top:1px dashed #cdbfa5">月給 25万円〜</div></div>
+    </div>
+  </div>
+</section>
+<section style="background:#ebe4d4;border-top:1px solid #d9cfbb;border-bottom:1px solid #d9cfbb">
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(56px,10vw,88px) 24px 112px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:56px">
+    <div style="display:flex;flex-direction:column;gap:24px">
+      <h2 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:clamp(26px,3.6vw,34px)">福利厚生</h2>
+      <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;border-top:1px solid #1d1c1a;font-size:15px">
+        <li style="padding:16px 0;border-bottom:1px solid #d9cfbb">鉛筆・消しゴムの無制限支給</li>
+        <li style="padding:16px 0;border-bottom:1px solid #d9cfbb">腱鞘炎予防手当（月5,000円）</li>
+        <li style="padding:16px 0;border-bottom:1px solid #d9cfbb">指圧師の来社（週1回）</li>
+        <li style="padding:16px 0;border-bottom:1px solid #d9cfbb">書道部・硬筆部への活動補助</li>
+        <li style="padding:16px 0;border-bottom:1px solid #d9cfbb">年間休日125日</li>
+      </ul>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:24px">
+      <h2 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:clamp(26px,3.6vw,34px)">選考の流れ</h2>
+      <ol style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:15px">
+        <li style="display:flex;gap:16px;align-items:center;background:#fbf8f1;border:1px solid #cdbfa5;padding:16px 20px"><b style="font-family:'Shippori Mincho B1',serif;color:#b8371f">一</b>手書きの履歴書を郵送（Web応募は受け付けておりません）</li>
+        <li style="display:flex;gap:16px;align-items:center;background:#fbf8f1;border:1px solid #cdbfa5;padding:16px 20px"><b style="font-family:'Shippori Mincho B1',serif;color:#b8371f">二</b>筆記試験（文字どおり、筆記による試験です）</li>
+        <li style="display:flex;gap:16px;align-items:center;background:#fbf8f1;border:1px solid #cdbfa5;padding:16px 20px"><b style="font-family:'Shippori Mincho B1',serif;color:#b8371f">三</b>面接（二回）</li>
+        <li style="display:flex;gap:16px;align-items:center;background:#1d1c1a;color:#f3eee3;padding:16px 20px"><b style="font-family:'Shippori Mincho B1',serif;color:#e07a5f">四</b>内定・鉛筆の授与</li>
+      </ol>
+    </div>
+  </div>
+</section>
+</sc-if>
+
+<!-- ============ NEWS ============ -->
+<sc-if value="{{ is.news }}" hint-placeholder-val="{{ false }}">
+<section style="background-color:#efe9dc;background-image:linear-gradient(rgba(184,55,31,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(184,55,31,.10) 1px,transparent 1px);background-size:28px 28px;border-bottom:1px solid #1d1c1a">
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(48px,9vw,64px) 24px clamp(56px,10vw,56px);display:flex;flex-direction:column;gap:16px">
+    <div style="font-size:13px;color:#4a463f;display:flex;gap:8px"><a href="#/" onClick="{{ go.home }}">ホーム</a><span>／</span><span>お知らせ</span></div>
+    <div style="font-size:13px;letter-spacing:.2em;color:#b8371f;font-weight:700">NEWS</div>
+    <h1 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:clamp(36px,6vw,60px);line-height:1.3;letter-spacing:.04em">お知らせ</h1>
+  </div>
+</section>
+<section>
+  <div style="max-width:960px;margin:0 auto;padding:clamp(56px,10vw,72px) 24px 112px;display:flex;flex-direction:column;border-top:0">
+    <div style="display:flex;flex-wrap:wrap;gap:8px 24px;padding:24px 0;border-bottom:1px solid #d9cfbb;border-top:1px solid #1d1c1a;align-items:baseline"><span style="font-variant-numeric:tabular-nums;color:#4a463f;font-size:14px;width:96px">2026.10.14</span><span style="font-size:12px;border:1px solid #1d1c1a;padding:2px 10px">お知らせ</span><span style="flex:1;min-width:240px;font-size:16px">年末年始のFAX受付について（12月27日まで）</span></div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px 24px;padding:24px 0;border-bottom:1px solid #d9cfbb;align-items:baseline"><span style="font-variant-numeric:tabular-nums;color:#4a463f;font-size:14px;width:96px">2026.09.30</span><span style="font-size:12px;border:1px solid #1d1c1a;padding:2px 10px">導入事例</span><span style="flex:1;min-width:240px;font-size:16px">N市様の窓口予約システムが稼働しました</span></div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px 24px;padding:24px 0;border-bottom:1px solid #d9cfbb;align-items:baseline"><span style="font-variant-numeric:tabular-nums;color:#4a463f;font-size:14px;width:96px">2026.09.12</span><span style="font-size:12px;border:1px solid #1d1c1a;padding:2px 10px">お知らせ</span><span style="flex:1;min-width:240px;font-size:16px">赤ペン査読工程に、朱色の新しいインクを導入しました</span></div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px 24px;padding:24px 0;border-bottom:1px solid #d9cfbb;align-items:baseline"><span style="font-variant-numeric:tabular-nums;color:#4a463f;font-size:14px;width:96px">2026.08.20</span><span style="font-size:12px;background:#b8371f;color:#f3eee3;padding:3px 11px">重要</span><span style="flex:1;min-width:240px;font-size:16px">当社への不正アクセスの試みについて（ソースコードは金庫内にあり、影響はありません）</span></div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px 24px;padding:24px 0;border-bottom:1px solid #d9cfbb;align-items:baseline"><span style="font-variant-numeric:tabular-nums;color:#4a463f;font-size:14px;width:96px">2026.07.01</span><span style="font-size:12px;border:1px solid #1d1c1a;padding:2px 10px">お知らせ</span><span style="flex:1;min-width:240px;font-size:16px">当社Webサイトを開設しました</span></div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px 24px;padding:24px 0;border-bottom:1px solid #d9cfbb;align-items:baseline"><span style="font-variant-numeric:tabular-nums;color:#4a463f;font-size:14px;width:96px">2026.05.18</span><span style="font-size:12px;border:1px solid #1d1c1a;padding:2px 10px">イベント</span><span style="flex:1;min-width:240px;font-size:16px">「第3回 写経でまなぶセキュアコーディング」開催報告</span></div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px 24px;padding:24px 0;border-bottom:1px solid #d9cfbb;align-items:baseline"><span style="font-variant-numeric:tabular-nums;color:#4a463f;font-size:14px;width:96px">2026.04.01</span><span style="font-size:12px;border:1px solid #1d1c1a;padding:2px 10px">お知らせ</span><span style="flex:1;min-width:240px;font-size:16px">新入社員8名に鉛筆を授与しました</span></div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px 24px;padding:24px 0;border-bottom:1px solid #d9cfbb;align-items:baseline"><span style="font-variant-numeric:tabular-nums;color:#4a463f;font-size:14px;width:96px">2026.02.10</span><span style="font-size:12px;border:1px solid #1d1c1a;padding:2px 10px">製品</span><span style="flex:1;min-width:240px;font-size:16px">筆記堂式コード用原稿用紙が累計100万枚を突破しました</span></div>
+  </div>
+</section>
+</sc-if>
+
+<!-- ============ CONTACT ============ -->
+<sc-if value="{{ is.contact }}" hint-placeholder-val="{{ false }}">
+<section style="background-color:#efe9dc;background-image:linear-gradient(rgba(184,55,31,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(184,55,31,.10) 1px,transparent 1px);background-size:28px 28px;border-bottom:1px solid #1d1c1a">
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(48px,9vw,64px) 24px clamp(56px,10vw,56px);display:flex;flex-direction:column;gap:16px">
+    <div style="font-size:13px;color:#4a463f;display:flex;gap:8px"><a href="#/" onClick="{{ go.home }}">ホーム</a><span>／</span><span>お問い合わせ</span></div>
+    <div style="font-size:13px;letter-spacing:.2em;color:#b8371f;font-weight:700">CONTACT</div>
+    <h1 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:clamp(36px,6vw,60px);line-height:1.3;letter-spacing:.04em">お問い合わせ</h1>
+    <p style="margin:0;font-size:16px;line-height:2;color:#3b3833;max-width:40em">安全のため、ご相談は来社・FAX・郵便を推奨しております。当社は電子メールを受信しておりません。</p>
+  </div>
+</section>
+<section>
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(56px,10vw,72px) 24px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:24px">
+    <div style="border:2px solid #b8371f;background:#fbf8f1;padding:28px;display:flex;flex-direction:column;gap:10px"><span style="font-size:12px;color:#b8371f;font-weight:700;letter-spacing:.1em">推奨</span><b style="font-family:'Shippori Mincho B1',serif;font-size:22px">FAX</b><span style="font-size:26px;font-weight:700;font-variant-numeric:tabular-nums">03-0000-1990</span><span style="font-size:13px;color:#4a463f">24時間受付。手書きの原稿でお送りください。</span></div>
+    <div style="border:1px solid #1d1c1a;background:#fbf8f1;padding:28px;display:flex;flex-direction:column;gap:10px"><span style="font-size:12px;color:#4a463f;font-weight:700;letter-spacing:.1em">郵便</span><b style="font-family:'Shippori Mincho B1',serif;font-size:22px">お手紙</b><span style="font-size:15px;line-height:1.8">〒101-0000 東京都千代田区神田文具町1-2-3 筆記堂ビル2階 営業部 宛</span></div>
+    <div style="border:1px solid #1d1c1a;background:#fbf8f1;padding:28px;display:flex;flex-direction:column;gap:10px"><span style="font-size:12px;color:#4a463f;font-weight:700;letter-spacing:.1em">電話</span><b style="font-family:'Shippori Mincho B1',serif;font-size:22px">お電話</b><span style="font-size:26px;font-weight:700;font-variant-numeric:tabular-nums">03-0000-1989</span><span style="font-size:13px;color:#4a463f">平日 9:00〜17:00。通話内容は担当者が手でメモします。</span></div>
+  </div>
+</section>
+<section>
+  <div style="max-width:760px;margin:0 auto;padding:clamp(56px,10vw,88px) 24px 112px;display:flex;flex-direction:column;gap:28px">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <h2 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:clamp(26px,3.6vw,34px)">Webフォーム</h2>
+      <p style="margin:0;font-size:15px;line-height:1.95;color:#3b3833">送信された内容は受信後ただちに印刷され、サーバーからは削除されます。ご返信は手書きの封書にてお送りします（7〜10営業日）。</p>
+    </div>
+    <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+    <form onSubmit="{{ onSubmit }}" style="display:flex;flex-direction:column;gap:22px;border-top:1px solid #1d1c1a;padding-top:28px">
+      <label style="display:flex;flex-direction:column;gap:8px;font-size:14px;font-weight:700">御社名<input name="company" style="font:inherit;font-weight:400;font-size:16px;padding:14px;border:1px solid #1d1c1a;background:#fbf8f1;border-radius:0"></label>
+      <label style="display:flex;flex-direction:column;gap:8px;font-size:14px;font-weight:700"><span>お名前 <span style="color:#b8371f">必須</span></span><input name="name" required="" style="font:inherit;font-weight:400;font-size:16px;padding:14px;border:1px solid #1d1c1a;background:#fbf8f1;border-radius:0"></label>
+      <label style="display:flex;flex-direction:column;gap:8px;font-size:14px;font-weight:700"><span>ご住所（返信用） <span style="color:#b8371f">必須</span></span><input name="address" required="" style="font:inherit;font-weight:400;font-size:16px;padding:14px;border:1px solid #1d1c1a;background:#fbf8f1;border-radius:0"></label>
+      <label style="display:flex;flex-direction:column;gap:8px;font-size:14px;font-weight:700">ご相談の種類<select name="type" style="font:inherit;font-weight:400;font-size:16px;padding:14px;border:1px solid #1d1c1a;background:#fbf8f1;border-radius:0"><option>手書き受託開発</option><option>既存システムの書き起こし</option><option>赤ペンセキュリティ監査</option><option>写経研修</option><option>その他</option></select></label>
+      <label style="display:flex;flex-direction:column;gap:8px;font-size:14px;font-weight:700">ご相談内容<textarea name="body" rows="6" style="font:inherit;font-weight:400;font-size:16px;line-height:1.8;padding:14px;border:1px solid #1d1c1a;background:#fbf8f1;border-radius:0;resize:vertical"></textarea></label>
+      <label style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.7"><input type="checkbox" required="" style="margin-top:5px;accent-color:#b8371f"><span>送信内容が印刷され、紙で保管されることに同意します。<a href="#/privacy" onClick="{{ go.privacy }}" style="border-bottom:1px solid currentColor">個人情報保護方針</a></span></label>
+      <button type="submit" style="align-self:flex-start;font:inherit;font-weight:700;font-size:15px;padding:18px 36px;background:#1d1c1a;color:#f3eee3;border:0;cursor:pointer" style-hover="background:#b8371f">送信して、印刷を依頼する</button>
+    </form>
+    </sc-if>
+    <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+    <div style="border:2px solid #b8371f;background:#fbf8f1;padding:40px;display:flex;flex-direction:column;gap:14px">
+      <b style="font-family:'Shippori Mincho B1',serif;font-size:24px">受け付けました。</b>
+      <p style="margin:0;font-size:15px;line-height:1.95;color:#3b3833">ただいま印刷を依頼しました。担当者が内容を確認し、手書きの封書にてご返信いたします。</p>
+    </div>
+    </sc-if>
+  </div>
+</section>
+</sc-if>
+
+<!-- ============ PRIVACY ============ -->
+<sc-if value="{{ is.privacy }}" hint-placeholder-val="{{ false }}">
+<section style="background-color:#efe9dc;background-image:linear-gradient(rgba(184,55,31,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(184,55,31,.10) 1px,transparent 1px);background-size:28px 28px;border-bottom:1px solid #1d1c1a">
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(48px,9vw,64px) 24px clamp(56px,10vw,56px);display:flex;flex-direction:column;gap:16px">
+    <div style="font-size:13px;color:#4a463f;display:flex;gap:8px"><a href="#/" onClick="{{ go.home }}">ホーム</a><span>／</span><span>個人情報保護方針</span></div>
+    <div style="font-size:13px;letter-spacing:.2em;color:#b8371f;font-weight:700">PRIVACY POLICY</div>
+    <h1 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:clamp(36px,6vw,60px);line-height:1.3;letter-spacing:.04em">個人情報保護方針</h1>
+  </div>
+</section>
+<section>
+  <div style="max-width:760px;margin:0 auto;padding:clamp(56px,10vw,72px) 24px 112px;display:flex;flex-direction:column;gap:36px;font-size:15px;line-height:1.95;color:#3b3833">
+    <div style="display:flex;flex-direction:column;gap:8px"><h2 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:21px;color:#1d1c1a">1. 取得する情報</h2><p style="margin:0">お問い合わせの際にご記入いただく御社名、お名前、ご住所、ご相談内容を取得します。</p></div>
+    <div style="display:flex;flex-direction:column;gap:8px"><h2 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:21px;color:#1d1c1a">2. 利用目的</h2><p style="margin:0">ご返信（封書）およびお見積りの送付にのみ利用します。</p></div>
+    <div style="display:flex;flex-direction:column;gap:8px"><h2 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:21px;color:#1d1c1a">3. 管理方法</h2><p style="margin:0">Webフォームで受信した情報は印刷後、サーバーから削除します。印刷物は施錠したキャビネットで保管し、保存期間の経過後に溶解処理します。</p></div>
+    <div style="display:flex;flex-direction:column;gap:8px"><h2 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:21px;color:#1d1c1a">4. 第三者への提供</h2><p style="margin:0">法令に基づく場合を除き、ご本人の同意なく第三者に提供することはありません。</p></div>
+    <div style="display:flex;flex-direction:column;gap:8px"><h2 style="margin:0;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:21px;color:#1d1c1a">5. お問い合わせ窓口</h2><p style="margin:0">総務部 個人情報担当（郵便またはFAXにて承ります）</p></div>
+    <p style="margin:0;text-align:right;color:#1d1c1a">制定　2026年7月1日<br>株式会社筆記堂システムズ　代表取締役　墨田 正筆</p>
+  </div>
+</section>
+</sc-if>
+
+</main>
+
+<footer style="background:#1d1c1a;color:#d9d2c3">
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(56px,10vw,72px) 24px 40px;display:flex;flex-direction:column;gap:48px">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:40px">
+      <div style="display:flex;flex-direction:column;gap:16px;max-width:360px">
+        <div style="display:flex;align-items:center;gap:12px"><div style="width:40px;height:40px;background:#b8371f;color:#f3eee3;display:flex;align-items:center;justify-content:center;font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:23px;border-radius:4px;transform:rotate(-4deg)">筆</div><span style="font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:18px;color:#f3eee3">株式会社筆記堂システムズ</span></div>
+        <p style="margin:0;font-size:13px;line-height:1.9">〒101-0000 東京都千代田区神田文具町1-2-3 筆記堂ビル2階<br>TEL 03-0000-1989　FAX 03-0000-1990</p>
+      </div>
+      <nav style="display:grid;grid-template-columns:repeat(2,minmax(120px,auto));gap:14px 32px;font-size:14px">
+        <a href="#/philosophy" onClick="{{ go.philosophy }}" style="color:#f3eee3" style-hover="color:#e07a5f">手書き宣言</a>
+        <a href="#/company" onClick="{{ go.company }}" style="color:#f3eee3" style-hover="color:#e07a5f">会社情報</a>
+        <a href="#/service" onClick="{{ go.service }}" style="color:#f3eee3" style-hover="color:#e07a5f">サービス</a>
+        <a href="#/recruit" onClick="{{ go.recruit }}" style="color:#f3eee3" style-hover="color:#e07a5f">採用情報</a>
+        <a href="#/process" onClick="{{ go.process }}" style="color:#f3eee3" style-hover="color:#e07a5f">開発工程</a>
+        <a href="#/news" onClick="{{ go.news }}" style="color:#f3eee3" style-hover="color:#e07a5f">お知らせ</a>
+        <a href="#/works" onClick="{{ go.works }}" style="color:#f3eee3" style-hover="color:#e07a5f">導入事例</a>
+        <a href="#/contact" onClick="{{ go.contact }}" style="color:#f3eee3" style-hover="color:#e07a5f">お問い合わせ</a>
+        <a href="#/security" onClick="{{ go.security }}" style="color:#f3eee3" style-hover="color:#e07a5f">セキュリティ</a>
+        <a href="#/privacy" onClick="{{ go.privacy }}" style="color:#f3eee3" style-hover="color:#e07a5f">個人情報保護方針</a>
+      </nav>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;border-top:1px solid #5a564f;padding-top:24px;font-size:12px">
+      <span>© 1989–2026 Hikkido Systems Co., Ltd.</span>
+      <sc-if value="{{ showDisclaimer }}" hint-placeholder-val="{{ true }}"><span>本サイトは架空の企業を題材にしたフィクションです。実在の団体・人物とは関係ありません。</span></sc-if>
+    </div>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;startPage&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;philosophy&quot;,&quot;service&quot;,&quot;process&quot;,&quot;works&quot;,&quot;security&quot;,&quot;company&quot;,&quot;recruit&quot;,&quot;news&quot;,&quot;contact&quot;,&quot;privacy&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;showDisclaimer&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+const PAGES = ['home','philosophy','service','process','works','security','company','recruit','news','contact','privacy'];
+class Component extends DCLogic {
+  readHash() {
+    const h = (window.location.hash || '').replace(/^#\/?/, '');
+    if (PAGES.includes(h)) return h;
+    return h ? 'home' : (this.props.startPage || 'home');
+  }
+  state = { page: this.readHash(), sent: false, w: window.innerWidth, menuOpen: false };
+  componentDidMount() {
+    document.documentElement.lang = 'ja';
+    this.onPop = () => { this.setState({ page: this.readHash(), sent: false }); window.scrollTo(0, 0); };
+    window.addEventListener('popstate', this.onPop);
+    this.onResize = () => this.setState({ w: window.innerWidth });
+    window.addEventListener('resize', this.onResize);
+    window.addEventListener('hashchange', this.onPop);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('popstate', this.onPop);
+    window.removeEventListener('resize', this.onResize);
+    window.removeEventListener('hashchange', this.onPop);
+  }
+  componentDidUpdate(prev) {
+    if (prev.startPage !== this.props.startPage && this.props.startPage) this.setState({ page: this.props.startPage });
+  }
+  nav(p) {
+    return (e) => {
+      if (e) e.preventDefault();
+      try { history.pushState(null, '', p === 'home' ? '#/' : '#/' + p); } catch (_) {}
+      this.setState({ page: p, sent: false, menuOpen: false });
+      window.scrollTo(0, 0);
+    };
+  }
+  renderVals() {
+    const go = {}, is = {};
+    PAGES.forEach(p => { go[p] = this.nav(p); is[p] = this.state.page === p; });
+    const m = this.state.w < 960;
+    return {
+      go, is,
+      isMobile: m, desktop: !m,
+      mobileMenuOpen: m && this.state.menuOpen,
+      menuLabel: this.state.menuOpen ? '閉じる' : 'メニュー',
+      toggleMenu: () => this.setState(st => ({ menuOpen: !st.menuOpen })),
+      mf: this.state.w < 720 ? { mode: 'horizontal-tb', height: 'auto', size: '18px', lh: '2.1' } : { mode: 'vertical-rl', height: '520px', size: '21px', lh: '2.4' },
+      sent: this.state.sent,
+      notSent: !this.state.sent,
+      onSubmit: (e) => { e.preventDefault(); this.setState({ sent: true }); },
+      showDisclaimer: this.props.showDisclaimer ?? true,
+    };
+  }
+}
+</script>
+</body>
+</html>
